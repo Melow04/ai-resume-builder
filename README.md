@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Resumint — AI Resume Builder (Mint Theme)
+
+Resumint helps you craft professional, tailored resumes with AI — private by default, stored locally in your browser. Built with Next.js and styled with a mint gradient theme (#3ECF8E → #1F6948).
 
 ## Getting Started
 
@@ -14,9 +16,9 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see Resumint.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can start editing the hero by modifying `app/page.tsx` and global styles in `app/globals.css`.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
