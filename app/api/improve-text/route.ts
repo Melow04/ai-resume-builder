@@ -1,9 +1,7 @@
-import { GoogleGenAI } from '@google/genai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { NextResponse } from 'next/server';
 
-const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY!,
-});
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 const TIMEOUT_MS = 30000;
 
@@ -149,35 +147,19 @@ export async function POST(req: Request) {
       setTimeout(() => reject(new Error('timeout')), TIMEOUT_MS)
     );
 
-    const apiPromise = ai.models.generateContent({
-      model: 'gemini-2.5-flash-lite',
-      config: {
-        thinkingConfig: { thinkingBudget: 0 },
-      },
-      contents: [
-        {
-          role: 'user',
-          parts: [{ text: prompt }],
-        },
-      ],
-    });
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const apiPromise = model.generateContent(prompt);
 
     const response = await Promise.race([apiPromise, timeoutPromise]);
 
-    if (!response || typeof response === 'string') {
+    if (!response) {
       throw new Error('Invalid response');
     }
 
-    const improvedText =
-      response &&
-      Array.isArray((response as unknown as { candidates: unknown[] }).candidates) &&
-      ((response as unknown as { candidates: { content: { parts: { text?: string }[] } }[] }).candidates[0]?.content?.parts[0]?.text?.trim())
-  ? (response as unknown as { candidates: { content: { parts: { text?: string }[] } }[] }).candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? text
-  : text;
+    const result = (response as { response: { text(): string } }).response;
+    const improvedText = result.text()?.trim() || text;
 
-    return NextResponse.json({ improvedText });
-
-  } catch (error: unknown) {
+    return NextResponse.json({ improvedText });  } catch (error: unknown) {
     console.error('AI Error:', error);
 
     if (typeof error === 'object' && error !== null && 'message' in error) {
