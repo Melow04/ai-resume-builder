@@ -74,7 +74,7 @@ export default function BuilderPage() {
         setResumeData(data);
         localStorage.setItem('resumeData', JSON.stringify(data));
         alert('Resume data imported successfully!');
-      } catch (error) {
+      } catch {
         alert('Error importing file. Please make sure it\'s a valid JSON file.');
       }
     };
