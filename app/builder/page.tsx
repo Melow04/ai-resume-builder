@@ -6,7 +6,7 @@ import ResumeForm from '@/component/ResumeForm';
 import ResumePreview from '@/component/ResumePreview';
 import PDFExport from '@/component/PDFExport';
 import ClientOnly from '@/component/ClientOnly';
-import { Save, Download, Trash2, Upload, FileDown } from 'lucide-react';
+import { Trash2, Upload, FileDown } from 'lucide-react';
 
 export default function BuilderPage() {
   const [resumeData, setResumeData] = useState<ResumeData>(defaultResumeData);
@@ -22,8 +22,8 @@ export default function BuilderPage() {
       try {
         setResumeData(JSON.parse(saved));
         setLastSaved(new Date());
-      } catch (error) {
-        console.error('Error loading saved data:', error);
+      } catch {
+        // Error loading saved data
       }
     }
   }, []);

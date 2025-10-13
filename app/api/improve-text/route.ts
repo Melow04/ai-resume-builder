@@ -170,30 +170,31 @@ export async function POST(req: Request) {
 
     const improvedText =
       response &&
-      Array.isArray((response as any).candidates) &&
-      (response as any).candidates[0]?.content?.parts[0]?.text?.trim()
-        ? (response as any).candidates[0].content.parts[0].text.trim()
-        : text;
+      Array.isArray((response as unknown as { candidates: unknown[] }).candidates) &&
+      ((response as unknown as { candidates: { content: { parts: { text?: string }[] } }[] }).candidates[0]?.content?.parts[0]?.text?.trim())
+  ? (response as unknown as { candidates: { content: { parts: { text?: string }[] } }[] }).candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? text
+  : text;
 
     return NextResponse.json({ improvedText });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('AI Error:', error);
 
-    if (error.message === 'timeout') {
-      return NextResponse.json(
-        { error: 'Request timeout. Please try again.' },
-        { status: 408 }
-      );
+    if (typeof error === 'object' && error !== null && 'message' in error) {
+      const message = (error as { message?: string }).message;
+      if (message === 'timeout') {
+        return NextResponse.json(
+          { error: 'Request timeout. Please try again.' },
+          { status: 408 }
+        );
+      }
+      if (message?.includes('quota')) {
+        return NextResponse.json(
+          { error: 'API quota exceeded. Please try again later.' },
+          { status: 429 }
+        );
+      }
     }
-
-    if (error.message?.includes('quota')) {
-      return NextResponse.json(
-        { error: 'API quota exceeded. Please try again later.' },
-        { status: 429 }
-      );
-    }
-
     return NextResponse.json(
       { error: 'Failed to improve text. Please try again.' },
       { status: 500 }
