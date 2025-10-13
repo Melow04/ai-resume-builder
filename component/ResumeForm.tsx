@@ -449,12 +449,15 @@ export default function ResumeForm({ data, onChange }: ResumeFormProps) {
           <textarea
             placeholder="Enter skills separated by commas (e.g., JavaScript, React, Node.js, Python)"
             value={data.skills.join(', ')}
-            onChange={(e) =>
+            onChange={(e) => {
+              // Allow spaces within skills but split by commas
+              const value = e.target.value;
+              const skills = value.split(',').map(s => s.trim()).filter(Boolean);
               onChange({
                 ...data,
-                skills: e.target.value.split(',').map(s => s.trim()).filter(Boolean),
-              })
-            }
+                skills: skills,
+              });
+            }}
             className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 h-28 text-white placeholder-gray-500 focus:border-orange-500 focus:bg-white/10 transition-all resize-none"
           />
           <button
