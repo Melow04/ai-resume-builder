@@ -1,6 +1,6 @@
-## Resuvmint — AI Resume Builder (Mint Theme)
+## Resumeant — AI Resume Builder (Mint Theme)
 
-Resuvmint helps you craft professional, tailored resumes with AI — private by default, stored locally in your browser. Built with Next.js and styled with a mint gradient theme (#3ECF8E → #1F6948).
+Resumeant helps you craft professional, tailored resumes with AI — private by default, stored locally in your browser. Built with Next.js and styled with a mint gradient theme (#3ECF8E → #1F6948).
 
 ## Getting Started
 
@@ -16,7 +16,7 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see Resuvmint.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see Resumeant.
 
 You can start editing the hero by modifying `app/page.tsx` and global styles in `app/globals.css`.
 
