@@ -32,14 +32,14 @@ export const analytics = {
   },
 
   // Track custom events
-  track: (eventName: string, properties?: Record<string, any>) => {
+  track: (eventName: string, properties?: Record<string, string | number | boolean | null>) => {
     if (typeof window !== 'undefined') {
       posthog.capture(eventName, properties);
     }
   },
 
   // Identify users (optional - for returning users)
-  identify: (userId: string, traits?: Record<string, any>) => {
+  identify: (userId: string, traits?: Record<string, string | number | boolean | null>) => {
     if (typeof window !== 'undefined') {
       posthog.identify(userId, traits);
     }
@@ -63,7 +63,7 @@ export const analytics = {
     analytics.track('feedback_submitted', {
       rating,
       feedback,
-      email,
+      email: email || null,
       timestamp: new Date().toISOString(),
     });
   },
