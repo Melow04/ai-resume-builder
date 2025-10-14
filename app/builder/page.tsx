@@ -20,7 +20,12 @@ export default function BuilderPage() {
     const saved = localStorage.getItem('resumeData');
     if (saved) {
       try {
-        setResumeData(JSON.parse(saved));
+        const parsedData = JSON.parse(saved);
+        // Migration: Convert old skills array format to new string format
+        if (Array.isArray(parsedData.skills)) {
+          parsedData.skills = parsedData.skills.join(', ');
+        }
+        setResumeData(parsedData);
         setLastSaved(new Date());
       } catch {
         // Error loading saved data
@@ -71,6 +76,10 @@ export default function BuilderPage() {
     reader.onload = (e) => {
       try {
         const data = JSON.parse(e.target?.result as string);
+        // Migration: Convert old skills array format to new string format
+        if (Array.isArray(data.skills)) {
+          data.skills = data.skills.join(', ');
+        }
         setResumeData(data);
         localStorage.setItem('resumeData', JSON.stringify(data));
         alert('Resume data imported successfully!');
