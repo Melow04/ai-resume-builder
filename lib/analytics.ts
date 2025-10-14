@@ -8,7 +8,8 @@ export const initPostHog = () => {
     if (apiKey) {
       posthog.init(apiKey, {
         api_host: apiHost,
-        loaded: (posthog) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        loaded: (posthog: any) => {
           if (process.env.NODE_ENV === 'development') posthog.debug();
         },
         capture_pageview: false, // We'll handle this manually
