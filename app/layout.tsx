@@ -11,8 +11,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Resuvmint – AI Resume Builder',
-  description: 'Resuvmint helps you craft professional, tailored resumes with AI. 100% private and stored locally on your device.',
+  title: 'Resumeant – AI Resume Builder',
+  description: 'Resumeant helps you craft professional, tailored resumes with AI. 100% private and stored locally on your device.',
 };
 
 export default function RootLayout({

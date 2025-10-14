@@ -16,7 +16,7 @@ export default function Home() {
 
           {/* Main Heading */}
           <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold mb-8 leading-[0.95] tracking-tight">
-            <span className="gradient-text block mb-2">Resuvmint</span>
+            <span className="gradient-text block mb-2">Resumeant</span>
             <span className="text-white block text-5xl sm:text-6xl md:text-7xl lg:text-8xl">AI Resume Builder</span>
           </h1>
 
@@ -42,7 +42,7 @@ export default function Home() {
               href="#features"
               className="p-4 glass text-white rounded-xl font-semibold text-lg glass-hover flex"
             > 
-              Learn More<Image src="/assets/resuvmint-mark.svg" alt="Resuvmint Logo" width={25} height={25} className="w-8 h-8" />
+              Learn More<Image src="/assets/resuvmint-mark.svg" alt="Resumeant Logo" width={25} height={25} className="w-8 h-8" />
             </Link>
           </div>
 
@@ -166,7 +166,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="py-8 px-4 border-t border-white/5 justify-center items-center flex ">
         <div className="max-w-6xl mx-auto text-center text-gray-500 text-sm">
-          <p>© 2025 Resuvmint — AI Resume Builder. Built with Next.js & Google Gemini.</p>
+          <p>© 2025 Resumeant — AI Resume Builder. Built with Next.js & Google Gemini.</p>
           <p className="mt-2">Your data is stored locally and never sent to our servers.</p>
         </div>
       </footer>
