@@ -33,7 +33,7 @@ export interface ResumeData {
   summary: string;
   workExperience: WorkExperience[];
   education: Education[];
-  skills: string[];
+  skills: string;
 }
 
 export const defaultResumeData: ResumeData = {
@@ -46,7 +46,7 @@ export const defaultResumeData: ResumeData = {
   summary: '',
   workExperience: [],
   education: [],
-  skills: [],
+  skills: '',
 };
 
 // Utility function to generate stable IDs without using Date.now()
