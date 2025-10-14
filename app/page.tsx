@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="w-full h-full mesh-gradient flex flex-col">
       {/* Hero Section */}
-      <section className="flex-1 flex items-center justify-center px-15 sm:px-3 py-15">
+      <section className="flex-1 flex items-center justify-center px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-20">
         <div className="max-w-4xl w-full text-center">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 animate-fadeInUp">
@@ -15,9 +15,9 @@ export default function Home() {
           </div>
 
           {/* Main Heading */}
-          <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold mb-8 leading-[0.95] tracking-tight">
-            <span className="gradient-text block mb-2">Resumeant</span>
-            <span className="text-white block text-5xl sm:text-6xl md:text-7xl lg:text-8xl">AI Resume Builder</span>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-8 leading-tight tracking-tight px-2">
+            <span className="gradient-text block mb-3">Resumeant</span>
+            <span className="text-white block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">AI Resume Builder</span>
           </h1>
 
           {/* Subheading */}
@@ -47,18 +47,18 @@ export default function Home() {
           </div>
 
           {/* Stats */}
-          <div className="flex justify-center gap-16 sm:gap-24">
+          <div className="flex justify-center gap-8 sm:gap-16 md:gap-20 lg:gap-24">
             <div className="text-center">
-              <div className="text-5xl sm:text-6xl font-bold text-white mb-2">100%</div>
-              <div className="text-base text-gray-400">Private</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-1 sm:mb-2">100%</div>
+              <div className="text-xs sm:text-sm md:text-base text-gray-400">Private</div>
             </div>
             <div className="text-center">
-              <div className="text-5xl sm:text-6xl font-bold text-white mb-2">AI</div>
-              <div className="text-base text-gray-400">Powered</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-1 sm:mb-2">AI</div>
+              <div className="text-xs sm:text-sm md:text-base text-gray-400">Powered</div>
             </div>
             <div className="text-center">
-              <div className="text-5xl sm:text-6xl font-bold text-white mb-2">Free</div>
-              <div className="text-base text-gray-400">Forever</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-1 sm:mb-2">Free</div>
+              <div className="text-xs sm:text-sm md:text-base text-gray-400">Forever</div>
             </div>
           </div>
         </div>
