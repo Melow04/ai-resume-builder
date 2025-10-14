@@ -49,40 +49,40 @@ export default function FeedbackSurvey({ onClose, trigger = 'manual' }: Feedback
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-[#1a1a1a] rounded-xl border border-[#2a2a2a] max-w-md w-full p-6 relative animate-in fade-in zoom-in duration-200">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-3 sm:p-4">
+      <div className="bg-[#1a1a1a] rounded-xl border border-[#2a2a2a] max-w-md w-full p-4 sm:p-6 relative animate-in fade-in zoom-in duration-200 max-h-[90vh] overflow-y-auto">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-white transition-colors"
           aria-label="Close feedback survey"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
 
         {step === 'rating' && (
-          <div className="space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#3ECF8E] to-[#1F6948] flex items-center justify-center">
-                <MessageSquare className="w-5 h-5 text-white" />
+          <div className="space-y-4 sm:space-y-6">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-[#3ECF8E] to-[#1F6948] flex items-center justify-center flex-shrink-0">
+                <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
-              <h2 className="text-xl font-bold text-white">How's your experience?</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-white">How's your experience?</h2>
             </div>
-            <p className="text-gray-400">
+            <p className="text-sm sm:text-base text-gray-400">
               We'd love to hear your feedback! How would you rate your experience with Resumeant?
             </p>
-            <div className="flex justify-between gap-2">
+            <div className="flex justify-between gap-1.5 sm:gap-2">
               {[1, 2, 3, 4, 5].map((num) => (
                 <button
                   key={num}
                   onClick={() => handleRatingSelect(num)}
-                  className="flex-1 aspect-square rounded-lg border-2 border-[#2a2a2a] hover:border-[#3ECF8E] hover:bg-[#3ECF8E]/10 transition-all duration-200 flex items-center justify-center text-2xl font-bold text-white hover:scale-105"
+                  className="flex-1 aspect-square rounded-lg border-2 border-[#2a2a2a] hover:border-[#3ECF8E] hover:bg-[#3ECF8E]/10 transition-all duration-200 flex items-center justify-center text-xl sm:text-2xl font-bold text-white hover:scale-105 active:scale-95"
                   aria-label={`Rate ${num} out of 5`}
                 >
                   {num}
                 </button>
               ))}
             </div>
-            <div className="flex justify-between text-xs text-gray-500">
+            <div className="flex justify-between text-[10px] sm:text-xs text-gray-500 px-1">
               <span>Not Good</span>
               <span>Excellent</span>
             </div>
@@ -90,17 +90,17 @@ export default function FeedbackSurvey({ onClose, trigger = 'manual' }: Feedback
         )}
 
         {step === 'feedback' && (
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#3ECF8E] to-[#1F6948] flex items-center justify-center">
-                <MessageSquare className="w-5 h-5 text-white" />
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-[#3ECF8E] to-[#1F6948] flex items-center justify-center flex-shrink-0">
+                <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
-              <h2 className="text-xl font-bold text-white">Thanks for rating us {rating}/5!</h2>
+              <h2 className="text-base sm:text-xl font-bold text-white">Thanks for rating us {rating}/5!</h2>
             </div>
             
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <div>
-                <label htmlFor="feedback" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="feedback" className="block text-xs sm:text-sm font-medium text-gray-300 mb-1.5 sm:mb-2">
                   Tell us more (optional)
                 </label>
                 <textarea
@@ -108,13 +108,13 @@ export default function FeedbackSurvey({ onClose, trigger = 'manual' }: Feedback
                   value={feedback}
                   onChange={(e) => setFeedback(e.target.value)}
                   placeholder="What did you like or what could we improve?"
-                  className="w-full px-4 py-3 bg-[#0a0a0a] border border-[#2a2a2a] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#3ECF8E] focus:ring-1 focus:ring-[#3ECF8E] resize-none"
-                  rows={4}
+                  className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-[#0a0a0a] border border-[#2a2a2a] rounded-lg text-sm sm:text-base text-white placeholder-gray-500 focus:outline-none focus:border-[#3ECF8E] focus:ring-1 focus:ring-[#3ECF8E] resize-none"
+                  rows={3}
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-gray-300 mb-1.5 sm:mb-2">
                   Email (optional - if you'd like us to follow up)
                 </label>
                 <input
@@ -123,27 +123,27 @@ export default function FeedbackSurvey({ onClose, trigger = 'manual' }: Feedback
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com"
-                  className="w-full px-4 py-3 bg-[#0a0a0a] border border-[#2a2a2a] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#3ECF8E] focus:ring-1 focus:ring-[#3ECF8E]"
+                  className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-[#0a0a0a] border border-[#2a2a2a] rounded-lg text-sm sm:text-base text-white placeholder-gray-500 focus:outline-none focus:border-[#3ECF8E] focus:ring-1 focus:ring-[#3ECF8E]"
                 />
               </div>
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex gap-2 sm:gap-3">
               <button
                 type="button"
                 onClick={() => setStep('rating')}
-                className="flex-1 px-4 py-3 border border-[#2a2a2a] rounded-lg text-white hover:bg-[#2a2a2a] transition-colors"
+                className="flex-1 px-3 py-2 sm:px-4 sm:py-3 border border-[#2a2a2a] rounded-lg text-sm sm:text-base text-white hover:bg-[#2a2a2a] transition-colors"
               >
                 Back
               </button>
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex-1 px-4 py-3 bg-gradient-to-r from-[#3ECF8E] to-[#1F6948] text-white rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
+                className="flex-1 px-3 py-2 sm:px-4 sm:py-3 bg-gradient-to-r from-[#3ECF8E] to-[#1F6948] text-white rounded-lg text-sm sm:text-base font-medium hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-1.5 sm:gap-2"
               >
                 {isSubmitting ? 'Submitting...' : (
                   <>
-                    Submit <Send className="w-4 h-4" />
+                    Submit <Send className="w-3 h-3 sm:w-4 sm:h-4" />
                   </>
                 )}
               </button>
@@ -152,10 +152,10 @@ export default function FeedbackSurvey({ onClose, trigger = 'manual' }: Feedback
         )}
 
         {step === 'success' && (
-          <div className="text-center space-y-4 py-8">
-            <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-[#3ECF8E] to-[#1F6948] flex items-center justify-center">
+          <div className="text-center space-y-3 sm:space-y-4 py-6 sm:py-8">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-full bg-gradient-to-br from-[#3ECF8E] to-[#1F6948] flex items-center justify-center">
               <svg
-                className="w-8 h-8 text-white"
+                className="w-6 h-6 sm:w-8 sm:h-8 text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -168,8 +168,8 @@ export default function FeedbackSurvey({ onClose, trigger = 'manual' }: Feedback
                 />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-white">Thank you!</h2>
-            <p className="text-gray-400">Your feedback helps us improve Resumeant.</p>
+            <h2 className="text-xl sm:text-2xl font-bold text-white">Thank you!</h2>
+            <p className="text-sm sm:text-base text-gray-400">Your feedback helps us improve Resumeant.</p>
           </div>
         )}
       </div>
