@@ -450,45 +450,41 @@ export default function ResumeForm({ data, onChange }: ResumeFormProps) {
         </h2>
         <div className="space-y-3">
           <textarea
-            placeholder="Enter skills separated by commas (e.g., JavaScript, React, Node.js, Python)"
-            value={data.skills.join(', ')}
+            placeholder="Describe your skills naturally... Examples: 'I'm skilled in digital marketing, SEO, and social media' OR 'I'm good at Excel, data analysis, and financial reporting' OR 'I know JavaScript, Python, and web development' OR 'I have experience with patient care, medical records, and clinical procedures'"
+            value={typeof data.skills === 'string' ? data.skills : (data.skills as unknown as string[]).join(', ')}
             onChange={(e) => {
-              // Allow spaces within skills but split by commas
-              const value = e.target.value;
-              const skills = value.split(',').map(s => s.trim()).filter(Boolean);
               onChange({
                 ...data,
-                skills: skills,
+                skills: e.target.value,
               });
             }}
-            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 h-28 text-white placeholder-gray-500 focus:border-orange-500 focus:bg-white/10 transition-all resize-none"
+            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 h-32 text-white placeholder-gray-500 focus:border-orange-500 focus:bg-white/10 transition-all resize-none"
           />
+          <div className="text-sm text-gray-400 italic">
+            💡 Tip: Describe your skills naturally in any field. AI will organize them into professional categories with proficiency levels!
+          </div>
           <button
             onClick={async () => {
-              const raw = data.skills.join(', ').trim();
-              if (!raw) return;
+              const skillsStr = typeof data.skills === 'string' ? data.skills : (data.skills as unknown as string[]).join(', ');
+              if (!skillsStr.trim()) return;
               setImprovingId('skills');
-              await improveText(raw, 'skills', (improved) => {
-                const cleaned = improved
-                  .split(',')
-                  .map((s) => s.trim())
-                  .filter(Boolean);
-                onChange({ ...data, skills: cleaned });
+              await improveText(skillsStr, 'skills', (improved) => {
+                onChange({ ...data, skills: improved });
               });
               setImprovingId(null);
             }}
-            disabled={improvingId === 'skills' || data.skills.length === 0}
+            disabled={improvingId === 'skills' || !(typeof data.skills === 'string' ? data.skills : (data.skills as unknown as string[]).join(', ')).trim()}
             className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-600 to-pink-600 text-white rounded-lg font-medium hover:shadow-lg hover:shadow-orange-500/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:scale-105 btn-glow"
           >
             {improvingId === 'skills' ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                <span>Improving...</span>
+                <span>Generating ATS Skills...</span>
               </>
             ) : (
               <>
                 <Sparkles className="w-4 h-4" />
-                <span>Improve with AI</span>
+                <span>Generate ATS Skills with AI</span>
               </>
             )}
           </button>
