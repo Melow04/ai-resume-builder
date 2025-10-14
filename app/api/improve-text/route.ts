@@ -95,21 +95,53 @@ function buildGenerateBulletsPrompt(text: string) {
 
 function buildSkillsPrompt(text: string) {
   const templates = [
-    'Rewrite this skills list to be ATS‑friendly, modern, and role‑relevant. Prefer canonical names (e.g., React, Node.js, PostgreSQL). Remove redundancies and weak, generic items. Limit to the strongest skills.',
-    'Curate and polish this skills inventory: merge synonyms, use industry‑standard terms, and keep only credible strengths. Optimize for screening keywords.',
-    'Refactor the skills into a sharp, recruiter‑ready list using compact, canonical labels. Remove junior/soft/obvious items unless distinctive.'
+    'Transform the following skills description into a professionally formatted, ATS-optimized skills section. Identify the type of role/industry from the skills mentioned and organize them into appropriate categories. Use industry-standard terminology.',
+    'Convert this skills input into a well-structured, categorized skills section suitable for a professional resume. Automatically detect the profession and create relevant category headers. Include proficiency levels where appropriate.',
+    'Create an ATS-friendly, categorized skills section from the provided text. Intelligently group related skills together based on the industry/profession. Use professional formatting and standard terminology.'
   ];
   const tones = [
-    'succinct and technical',
-    'modern and industry‑standard',
-    'concise and ATS‑optimized'
+    'professional and organized',
+    'industry-appropriate and clear',
+    'ATS-optimized and structured'
   ];
 
   return (
     `${pick(templates)}\n` +
     `Tone: ${pick(tones)}.\n` +
-    `Return format: ONLY a single comma‑separated list of skills (one line, no headings, no categories, no bullets, no extra text).\n\n` +
-    `${text}`
+    `Format Requirements:\n` +
+    `- Automatically detect the industry/profession from the skills mentioned\n` +
+    `- Organize skills into relevant categories appropriate for that field\n` +
+    `- Each category on a new line\n` +
+    `- Skills within each category should be comma-separated\n` +
+    `- Use standard industry terminology\n` +
+    `- Add proficiency levels where appropriate (e.g., "Excel (Advanced)", "Spanish (Fluent)")\n` +
+    `- Return ONLY the formatted skills section, no introduction or extra commentary\n\n` +
+    `Example formats for different professions:\n\n` +
+    `Tech/Engineering:\n` +
+    `Technical Skills: JavaScript, Python, React.js, Node.js\n` +
+    `Tools & Platforms: Git, AWS, Docker, VS Code\n` +
+    `Soft Skills: Problem Solving, Team Collaboration, Agile Methodology\n\n` +
+    `Marketing/Sales:\n` +
+    `Digital Marketing: SEO, Google Analytics, Social Media Marketing, Email Campaigns\n` +
+    `Tools & Software: HubSpot, Salesforce, Adobe Creative Suite, Canva\n` +
+    `Core Competencies: Strategic Planning, Client Relations, Data Analysis\n\n` +
+    `Healthcare:\n` +
+    `Clinical Skills: Patient Assessment, Medication Administration, Wound Care\n` +
+    `Technical Proficiencies: Electronic Health Records (EHR), Medical Terminology\n` +
+    `Certifications & Licenses: BLS Certified, ACLS, State RN License\n\n` +
+    `Business/Finance:\n` +
+    `Financial Analysis: Financial Modeling, Budgeting, Forecasting, Variance Analysis\n` +
+    `Software & Tools: Excel (Advanced), QuickBooks, SAP, Bloomberg Terminal\n` +
+    `Professional Skills: Stakeholder Management, Report Writing, Regulatory Compliance\n\n` +
+    `Creative/Design:\n` +
+    `Design Tools: Adobe Photoshop, Illustrator, Figma, Sketch, InDesign\n` +
+    `Core Skills: UI/UX Design, Typography, Branding, Wireframing\n` +
+    `Additional: HTML/CSS, Responsive Design, Design Systems\n\n` +
+    `Education/Teaching:\n` +
+    `Teaching Methods: Differentiated Instruction, Curriculum Development, Classroom Management\n` +
+    `Technology: Google Classroom, Learning Management Systems, Educational Software\n` +
+    `Certifications: State Teaching License, ESL Certification\n\n` +
+    `Now transform the following input:\n${text}`
   );
 }
 
