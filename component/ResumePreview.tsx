@@ -81,14 +81,12 @@ export default function ResumePreview({ data }: ResumePreviewProps) {
         )}
 
         {/* Skills */}
-        {data.skills.length > 0 && (
+        {(typeof data.skills === 'string' ? data.skills : (data.skills as unknown as string[]).join(', ')).trim() && (
           <div>
             <h2 className="text-lg font-bold text-gray-900 mb-3 uppercase tracking-wide border-b border-gray-400 pb-1">Skills</h2>
-            <ul className="list-disc list-outside text-gray-800 text-sm ml-4 space-y-1">
-              {data.skills.map((skill, index) => (
-                <li key={index}>{skill}</li>
-              ))}
-            </ul>
+            <div className="text-gray-800 text-sm space-y-2 whitespace-pre-line">
+              {typeof data.skills === 'string' ? data.skills : (data.skills as unknown as string[]).join(', ')}
+            </div>
           </div>
         )}
       </div>
