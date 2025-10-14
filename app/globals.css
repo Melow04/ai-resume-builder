@@ -76,6 +76,11 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: none;
+  display: inline-block;
+  max-width: 100%;
 }
 
 /* Animated Gradient Background */
