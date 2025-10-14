@@ -146,10 +146,16 @@ if (data.education.length > 0) {
 }
 
 // Skills
-if (data.skills.length > 0) {
+const skillsStr = typeof data.skills === 'string' ? data.skills : (data.skills as unknown as string[]).join(', ');
+if (skillsStr.trim()) {
   checkPageBreak(20);
   addText('SKILLS', 12, 'bold');
-  addText(data.skills.join(' • '), 10);
+  // Split by lines and add each line separately to preserve formatting
+  const skillLines = skillsStr.split('\n').filter(line => line.trim());
+  skillLines.forEach(line => {
+    checkPageBreak(15);
+    addText(line, 10);
+  });
 }
 
 // Save PDF
