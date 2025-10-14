@@ -4,6 +4,7 @@ import { ResumeData } from '@/lib/types';
 import jsPDF from 'jspdf';
 import { Download } from 'lucide-react';
 import ClientOnly from './ClientOnly';
+import { analytics } from '@/lib/analytics';
 
 interface PDFExportProps {
   data: ResumeData;
@@ -11,6 +12,7 @@ interface PDFExportProps {
 
 export default function PDFExport({ data }: PDFExportProps) {
   const generatePDF = () => {
+    analytics.resumeExported('pdf'); // Track PDF export
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
     const margin = 20;

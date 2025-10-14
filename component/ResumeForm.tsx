@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ResumeData, WorkExperience, Education, generateId } from '@/lib/types';
 import { Sparkles, Plus, Trash2, Loader2 } from 'lucide-react';
+import { analytics } from '@/lib/analytics';
 
 interface ResumeFormProps {
   data: ResumeData;
@@ -14,6 +15,7 @@ export default function ResumeForm({ data, onChange }: ResumeFormProps) {
 
   const improveText = async (text: string, type: string, callback: (improved: string) => void) => {
     try {
+      analytics.aiImprovementUsed(type); // Track AI usage
       const response = await fetch('/api/improve-text', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -40,6 +42,7 @@ export default function ResumeForm({ data, onChange }: ResumeFormProps) {
       description: '',
       bullets: [''],
     };
+    analytics.track('work_experience_added'); // Track feature usage
     onChange({ ...data, workExperience: [...data.workExperience, newExp] });
   };
 

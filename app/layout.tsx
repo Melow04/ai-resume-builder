@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Navigation from '@/component/Navigation';
+import PostHogProvider from '@/component/PostHogProvider';
+import FeedbackButton from '@/component/FeedbackButton';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -23,8 +25,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className={inter.className} suppressHydrationWarning>
-        <Navigation />
-        {children}
+        <PostHogProvider>
+          <Navigation />
+          {children}
+          <FeedbackButton />
+        </PostHogProvider>
       </body>
     </html>
   );
