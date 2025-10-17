@@ -108,6 +108,9 @@ function buildSkillsPrompt(text: string) {
   return (
     `${pick(templates)}\n` +
     `Tone: ${pick(tones)}.\n` +
+    `CRITICAL INSTRUCTION: Return ONLY the formatted skills categories and skills. Do NOT include any introductory text, explanations, or commentary.\n` +
+    `Do NOT write things like "Based on the provided skills..." or "Here's an ATS-optimized skills section:"\n` +
+    `Start IMMEDIATELY with the first category.\n\n` +
     `Format Requirements:\n` +
     `- Automatically detect the industry/profession from the skills mentioned\n` +
     `- Organize skills into relevant categories appropriate for that field\n` +
@@ -115,7 +118,7 @@ function buildSkillsPrompt(text: string) {
     `- Skills within each category should be comma-separated\n` +
     `- Use standard industry terminology\n` +
     `- Add proficiency levels where appropriate (e.g., "Excel (Advanced)", "Spanish (Fluent)")\n` +
-    `- Return ONLY the formatted skills section, no introduction or extra commentary\n\n` +
+    `- Return ONLY the formatted skills section, absolutely NO introduction or preamble\n\n` +
     `Example formats for different professions:\n\n` +
     `Tech/Engineering:\n` +
     `Technical Skills: JavaScript, Python, React.js, Node.js\n` +
@@ -207,7 +210,33 @@ export async function POST(req: Request) {
         ? (response as unknown as { candidates: { content: { parts: { text?: string }[] } }[] }).candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? text
         : text;
 
-    return NextResponse.json({ improvedText });  } catch (error: unknown) {
+    // Clean up skills response - remove any introductory text
+    let finalText = improvedText;
+    if (type === 'skills') {
+      // Remove common AI preambles and explanations
+      const unwantedPhrases = [
+        /^Based on the provided skills[^:]*:/i,
+        /^Here'?s an ATS-optimized skills section[^:]*:/i,
+        /^Here are the skills formatted[^:]*:/i,
+        /^I've organized[^:]*:/i,
+        /^The following is[^:]*:/i,
+        /^\*\*.*?\*\*\s*/g, // Remove bold markdown
+        /^[^\n]*applying for a role in[^\n]*\n*/i,
+      ];
+      
+      unwantedPhrases.forEach(pattern => {
+        finalText = finalText.replace(pattern, '').trim();
+      });
+      
+      // Remove any leading/trailing whitespace and empty lines
+      finalText = finalText
+        .split('\n')
+        .filter((line: string) => line.trim())
+        .join('\n')
+        .trim();
+    }
+
+    return NextResponse.json({ improvedText: finalText });  } catch (error: unknown) {
     console.error('AI Error:', error);
 
     if (typeof error === 'object' && error !== null && 'message' in error) {
